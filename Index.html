@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Service Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+            /* Subtle gradient background */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            /* Include padding in element's total width and height */
+        }
+
+        .container {
+            max-width: 600px;
+            /* Slightly narrower container */
+            width: 100%;
+            /* Ensure it takes full width on small screens */
+            margin: auto;
+            background: white;
+            padding: 40px;
+            /* Increased padding */
+            border-radius: 12px;
+            /* More rounded corners */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            /* Softer, larger shadow */
+            box-sizing: border-box;
+            /* Include padding in element's total width and height */
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 30px;
+            /* Slightly larger heading */
+            color: #3a4a60;
+            /* Deeper blue-grey */
+            margin-bottom: 30px;
+            /* More space below heading */
+            font-weight: 700;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            /* Medium weight */
+            color: #556270;
+            /* Softer text color */
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            /* Slightly more padding */
+            margin-bottom: 20px;
+            /* More space below inputs */
+            border-radius: 8px;
+            border: 1px solid #d0d7de;
+            /* Softer border color */
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            /* Smooth transitions */
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #5a99f5;
+            /* Highlight color on focus */
+            box-shadow: 0 0 5px rgba(90, 153, 245, 0.3);
+            /* Subtle shadow on focus */
+        }
+
+
+        input[type="tel"] {
+            -moz-appearance: textfield;
+        }
+
+        input[type="tel"]::-webkit-outer-spin-button,
+        input[type="tel"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        select {
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        /* Location Group Layout */
+        .location-group {
+            margin-bottom: 20px; /* Standard input margin */
+        }
+
+        .location-input-group {
+            display: flex;
+            gap: 10px; /* Space between input and button */
+            align-items: center; /* Vertically align items */
+        }
+
+         .location-input-group input[type="text"] {
+             margin-bottom: 0; /* Remove bottom margin when in flex group */
+             flex-grow: 1; /* Allow input to fill available space */
+         }
+
+
+        .form-actions {
+            text-align: center;
+            margin-top: 30px;
+            /* More space above buttons */
+            display: flex;
+            /* Use flexbox for layout */
+            justify-content: center;
+            /* Center buttons */
+            flex-wrap: wrap;
+            /* Allow buttons to wrap on smaller screens */
+            gap: 15px;
+            /* Space between flex items */
+        }
+
+        .form-actions button,
+        .form-actions a.button {
+            /* Apply button styles to anchor tags */
+            padding: 12px 25px;
+            /* Slightly adjusted padding */
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 17px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            text-decoration: none;
+            /* Remove underline from links */
+            display: inline-flex;
+            /* Use flex to potentially center text/icon */
+            align-items: center;
+            /* Vertically center text/icon */
+            justify-content: center;
+            /* Horizontally center text/icon */
+        }
+
+        .form-actions button:active,
+        .form-actions a.button:active {
+            transform: translateY(0);
+        }
+
+        /* Specific Button Colors */
+        button[type="submit"] {
+            background-color: #4a90e2;
+            /* Primary submit button */
+        }
+
+        button[type="submit"]:hover {
+            background-color: #357ab8;
+            transform: translateY(-1px);
+        }
+
+        .call-btn {
+            background-color: #5a6270;
+            /* Grey/Dark color for call */
+        }
+
+        .call-btn:hover {
+            background-color: #444d57;
+            transform: translateY(-1px);
+        }
+
+
+        .whatsapp-btn {
+            background-color: #25d366;
+            /* WhatsApp green */
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #1da851;
+            transform: translateY(-1px);
+        }
+
+         .get-location-btn {
+             background-color: #007bff; /* Bootstrap primary blue color */
+             color: white;
+             padding: 12px 15px; /* Match input padding height */
+             white-space: nowrap; /* Prevent text wrapping on button */
+         }
+
+         .get-location-btn:hover {
+             background-color: #0056b3;
+             transform: translateY(-1px);
+         }
+
+         .get-location-btn:disabled {
+             background-color: #cccccc;
+             cursor: not-allowed;
+         }
+
+
+        .info {
+            margin-top: 25px;
+            font-size: 15px;
+            color: #2ecc71;
+            /* Success color */
+            text-align: center;
+            font-weight: 500;
+            min-height: 20px;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            /* Error color */
+            font-size: 13px;
+            /* Smaller font */
+             margin-top: -10px; /* Adjusted margin relative to the group */
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        /* Adjust margin below the location group if error is hidden */
+        .location-group:not(:has(.error-message:not([style*="display: none"]))) {
+             margin-bottom: 20px; /* Normal spacing if no error */
+        }
+         /* Adjust margin below the location group if error is visible */
+         .location-group:has(.error-message:not([style*="display: none"])) {
+             margin-bottom: 0; /* Reduces space if error is visible */
+         }
+
+
+        input[readonly] {
+            background-color: #f8f9fa;
+            /* Lighter background for readonly */
+            cursor: default;
+            /* Default cursor for readonly */
+        }
+
+        input[readonly]:focus {
+            border-color: #d0d7de;
+            box-shadow: none;
+        }
+
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                /* Adjusted padding */
+            }
+
+            h2 {
+                font-size: 26px;
+            }
+
+            label,
+            input,
+            select {
+                font-size: 14px;
+            }
+
+             .location-input-group {
+                 flex-direction: column; /* Stack input and button */
+                 align-items: stretch; /* Stretch items to full width */
+                 gap: 10px;
+             }
+
+             .location-input-group input[type="text"] {
+                 margin-bottom: 0; /* Ensure no extra margin */
+             }
+
+             .get-location-btn {
+                 width: 100%; /* Make button full width */
+             }
+
+
+            .form-actions button,
+            .form-actions a.button {
+                padding: 10px 20px;
+                font-size: 15px;
+                flex-grow: 1;
+                /* Allow buttons to grow to fill space */
+                min-width: 120px;
+                /* Minimum width for buttons */
+                max-width: 100%;
+                /* Prevent buttons from exceeding container width */
+            }
+
+            .form-actions {
+                gap: 10px;
+                /* Smaller gap on small screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            .form-actions button,
+            .form-actions a.button {
+                padding: 10px 15px;
+                font-size: 14px;
+                min-width: unset;
+                /* Remove min-width below 480px */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Car Service Booking</h2>
+        <form id="carServiceForm" action="https://formspree.io/f/xeogqkpp" method="POST">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required />
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter 10-digit phone number" required
+                pattern="[0-9]{10}" title="Please enter a 10-digit phone number" maxlength="10" />
+            <div class="error-message" id="phoneError">Please enter a valid 10-digit phone number.</div>
+
+            <label for="carBrand">Car Brand:</label>
+            <select id="carBrand" name="carBrand" required>
+                <option value="">Select Car Brand</option>
+                <option value="Hyundai">Hyundai</option>
+                <option value="Ford">Ford</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Volkswagen">Volkswagen</option>
+                <option value="Audi">Audi</option>
+                <option value="Renault">Renault</option>
+                <option value="Chevrolet">Chevrolet</option>
+                <option value="Nissan">Nissan</option>
+                <option value="MG">MG</option>
+                <option value="Mahindra">Mahindra</option>
+                <option value="Tata">Tata</option>
+                <option value="Mercedes-Benz">Mercedes-Benz</option>
+                <option value="BMW">BMW</option>
+                <option value="Honda">Honda</option>
+                <option value="Maruti-Suzuki">Maruti-Suzuki</option>
+            </select>
+
+            <label for="carModel">Car Model:</label>
+            <select id="carModel" name="carModel" required disabled>
+                <option value="">Select Car Brand First</option>
+            </select>
+
+            <label for="fuelType">Fuel Type:</label>
+            <select id="fuelType" name="fuelType" required>
+                <option value="">Select Fuel Type</option>
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="CNG">CNG</option>
+                <option value="Electric">Electric</option>
+                <option value="Hybrid">Hybrid</option>
+            </select>
+
+            <label for="manufacturingYear">Manufacturing Year:</label>
+            <select id="manufacturingYear" name="manufacturingYear" required>
+                <option value="">Select Year</option>
+            </select>
+
+            <div class="location-group">
+                <label for="location">Location:</label>
+                <div class="location-input-group">
+                    <input type="text" id="location" name="location" placeholder="Fetching location..." readonly required />
+                    <button type="button" id="getLocationBtn" class="get-location-btn">Get Location</button>
+                </div>
+                <div class="error-message" id="locationError">Could not fetch location. Please enable location services or
+                    enter manually.</div>
+            </div>
+
+
+            <input type="hidden" name="_subject" value="New Car Service Booking Received!">
+
+            <div class="form-actions">
+                <button type="submit">Submit Booking</button>
+                <a href="tel:+919303931226" class="button call-btn">Call Now</a>
+                <a href="https://wa.me/+919303931226" class="button whatsapp-btn" target="_blank">WhatsApp</a>
+            </div>
+        </form>
+
+        <div class="info" id="responseMessage"></div>
+    </div>
+
+    <script>
+        // --- DATA (Keep your existing car models data) ---
+        const carModels = {
+            'Ford': { /* ... */ 'Hatchbacks': ['Ford Fiesta (1995–Present)', 'Ford Focus (1998–2023)'], 'Sedans': ['Ford Escort (1995–2003)', 'Ford Fusion (2005–2012)', 'Ford Mondeo (1995–2021)', 'Ford Taurus (1995–2019)'], 'SUVs/Crossovers': ['Ford EcoSport (2003–Present)', 'Ford Kuga (2008–Present)', 'Ford Escape (2000–Present)', 'Ford Edge (2007–2023)', 'Ford Explorer (1995–Present)', 'Ford Expedition (1996–Present)'], 'Pickups': ['Ford Ranger (1995–Present)', 'Ford F-150 (1995–Present)'], 'Electric Vehicles (EVs)': ['Ford Mustang Mach-E (2021–Present)', 'Ford F-150 Lightning (2022–Present)'] },
+            'Toyota': { /* ... */ 'Hatchbacks': ['Toyota Yaris (1999–Present)', 'Toyota Auris (2006–2018)'], 'Sedans': ['Toyota Corolla (1995–Present)', 'Toyota Camry (1995–Present)', 'Toyota Avalon (1995–2020)', 'Toyota Prius (1997–Present)'], 'SUVs/Crossovers': ['Toyota RAV4 (1995–Present)', 'Toyota Highlander (2001–Present)', 'Toyota Fortuner (2005–Present)', 'Toyota Land Cruiser (1995–Present)', 'Toyota Venza (2008–Present)', 'Toyota C-HR (2016–Present)'], 'Pickups': ['Toyota Hilux (1995–Present)', 'Toyota Tacoma (1995–Present)'], 'Electric Vehicles (EVs)': ['Toyota bZ4X (2022–Present)', 'Toyota Mirai (2014–Present, Hydrogen EV)'] },
+            'Volkswagen': { /* ... */ 'Hatchbacks': ['Volkswagen Polo (1995–Present)', 'Volkswagen Golf (1997–Present)'], 'Sedans': ['Volkswagen Jetta (1995–Present)', 'Volkswagen Passat (1996–2022)'], 'SUVs/Crossovers': ['Volkswagen Tiguan (2007–Present)', 'Volkswagen Taigun (2021–Present)', 'Volkswagen Touareg (2002–Present)'], 'Electric Vehicles (EVs)': ['Volkswagen ID.3 (2020–Present)', 'Volkswagen ID.4 (2021–Present)'] },
+            'Audi': { /* ... */ 'Sedans': ['Audi A3 (1996–Present)', 'Audi A4 (1994–Present)', 'Audi A6 (1994–Present)', 'Audi A8 (1994–Present)'], 'SUVs/Crossovers': ['Audi Q3 (2011–Present)', 'Audi Q5 (2008–Present)', 'Audi Q7 (2005–Present)', 'Audi Q8 (2018–Present)'], 'Electric Vehicles (EVs)': ['Audi e-tron (2018–Present)', 'Audi Q4 e-tron (2021–Present)'] },
+            'Chevrolet': { /* ... */ 'Hatchbacks': ['Chevrolet Spark (1998–2020)'], 'Sedans': ['Chevrolet Aveo (2002–2011)'], 'SUVs/Crossovers': ['Chevrolet Tavera'] },
+            'Hyundai': { /* ... */ 'Hatchbacks': ['Hyundai Santro (1998–2022)', 'Hyundai Getz (2002–2010)', 'Hyundai i10 (2007–2017)', 'Hyundai i20 (2008–Present)', 'Hyundai Grand i10 (2013–Present)', 'Hyundai Exter (2023–Present)'], 'Sedans': ['Hyundai Accent (1995–2014)', 'Hyundai Elantra (1995–2022)', 'Hyundai Verna (2006–Present)', 'Hyundai Sonata (1998–2014, 2021–Present)', 'Hyundai Aura (2020–Present)', 'Hyundai Stellar (1994–2000)'], 'SUVs/Crossovers': ['Hyundai Tucson (2005–Present)', 'Hyundai Creta (2015–Present)', 'Hyundai Venue (2019–Present)', 'Hyundai Alcazar (2021–Present)', 'Hyundai Santa Fe (2001–2020)', 'Hyundai Terracan (2001–2007)', 'Hyundai Kona (2017–2024)', 'Hyundai ix35 (2009–2015)', 'Hyundai Exter (2023–Present)'], 'Electric Vehicles (EVs)': ['Hyundai Kona Electric (2019–2024)', 'Hyundai Ioniq 5 (2021–Present)', 'Hyundai Creta Electric (2025–Present)'], 'MPVs/Minivans': ['Hyundai Getz Prime (2004–2010)', 'Hyundai Matrix (2001–2009)', 'Hyundai Stargazer (2022–Present)', 'Hyundai Trajet (2000–2008)'], 'Performance Models': ['Hyundai i30 N (2017–2023)', 'Hyundai Veloster N (2018–2021)', 'Hyundai i20 N (2020–Present)'] },
+            'BMW': { /* ... */ 'Hatchbacks': ['BMW 1 Series (2004–Present)', 'BMW i3 (2013–2022)'], 'Sedans': ['BMW 3 Series (1975–Present)', 'BMW 5 Series (1972–Present)', 'BMW 7 Series (1977–Present)', 'BMW i4 (2021–Present)'], 'SUVs/Crossovers': ['BMW X1 (2009–Present)', 'BMW X3 (2003–Present)', 'BMW X5 (1999–Present)', 'BMW X7 (2018–Present)', 'BMW X6 (2008–Present)', 'BMW X4 (2014–Present)'], 'Coupes': ['BMW 2 Series Coupe (2014–Present)', 'BMW 4 Series Coupe (2013–Present)', 'BMW 8 Series Coupe (1990–1999, 2018–Present)'], 'Convertibles': ['BMW Z4 (2002–Present)', 'BMW 4 Series Convertible (2013–Present)'], 'Electric Vehicles (EVs)': ['BMW i3 (2013–2022)', 'BMW i4 (2021–Present)', 'BMW iX (2021–Present)', 'BMW iX3 (2020–Present)', 'BMW i7 (2022–Present)'], 'Performance Models': ['BMW M2 (2015–Present)', 'BMW M3 (1985–Present)', 'BMW M4 (2014–Present)', 'BMW M5 (1984–Present)', 'BMW M8 (2019–Present)'] },
+            "Mercedes-Benz": { /* ... */ 'Sedans': ['Mercedes-Benz A-Class (1997–Present)', 'Mercedes-Benz C-Class (1995–Present)', 'Mercedes-Benz E-Class (1995–Present)', 'Mercedes-Benz S-Class (1995–Present)', 'Mercedes-Benz CLA (2013–Present)'], 'SUVs/Crossovers': ['Mercedes-Benz GLA (2014–Present)', 'Mercedes-Benz GLB (2019–Present)', 'Mercedes-Benz GLC (2015–Present)', 'Mercedes-Benz GLE (2015–Present)', 'Mercedes-Benz GLS (2006–Present)', 'Mercedes-Benz G-Class (1979–Present)'], 'Coupes': ['Mercedes-Benz CLA Coupe (2013–Present)', 'Mercedes-Benz C-Class Coupe (2015–Present)', 'Mercedes-Benz E-Class Coupe (2010–2023)', 'Mercedes-Benz S-Class Coupe (2014–2021)'], 'Convertibles': ['Mercedes-Benz C-Class Cabriolet (2016–2023)', 'Mercedes-Benz E-Class Cabriolet (2010–2023)', 'Mercedes-Benz S-Class Cabriolet (2016–2021)', 'Mercedes-Benz SL (1954–Present)', 'Mercedes-Benz SLC (1996–2020)'], 'Electric Vehicles (EVs)': ['Mercedes-Benz EQC (2019–Present)', 'Mercedes-Benz EQB (2021–Present)', 'Mercedes-Benz EQE (2022–Present)', 'Mercedes-Benz EQS (2021–Present)', 'Mercedes-Benz EQA (2021–Present)'], 'Performance Models': ['Mercedes-AMG A45 (2013–Present)', 'Mercedes-AMG C63 (2008–Present)', 'Mercedes-AMG E63 (2007–Present)', 'Mercedes-AMG GT (2015–Present)', 'Mercedes-AMG G63 (2012–Present)'] },
+            'Renault': { /* PLACEHOLDER - Update! */ 'Hatchbacks': ['Renault Kwid', 'Renault Triber'], 'SUVs/Crossovers': ['Renault Duster', 'Renault Kiger'] },
+            'Nissan': { /* PLACEHOLDER - Update! */ 'Sedans': ['Nissan Sunny'], 'SUVs/Crossovers': ['Nissan Kicks', 'Nissan Magnite', 'Nissan Terrano'] },
+            'MG': { /* PLACEHOLDER - Update! */ 'SUVs/Crossovers': ['MG Hector', 'MG Astor', 'MG Gloster', 'MG ZS EV'], 'Electric Vehicles (EVs)': ['MG ZS EV', 'MG Comet EV'] },
+            'Mahindra': { /* PLACEHOLDER - Update! */ 'SUVs/Crossovers': ['Mahindra Thar', 'Mahindra Scorpio', 'Mahindra XUV700', 'Mahindra XUV300', 'Mahindra Bolero'], 'Pickups': ['Mahindra Bolero Pik-Up'], 'Electric Vehicles (EVs)': ['Mahindra XUV400'] },
+            'Tata': { /* PLACEHOLDER - Update! */ 'Hatchbacks': ['Tata Tiago', 'Tata Altroz'], 'Sedans': ['Tata Tigor'], 'SUVs/Crossovers': ['Tata Nexon', 'Tata Punch', 'Tata Harrier', 'Tata Safari'], 'Electric Vehicles (EVs)': ['Tata Nexon EV', 'Tata Tigor EV', 'Tata Tiago EV'] },
+            'Honda': { /* PLACEHOLDER - Update! */ 'Hatchbacks': ['Honda Jazz', 'Honda Brio'], 'Sedans': ['Honda City', 'Honda Amaze', 'Honda Civic'], 'SUVs/Crossovers': ['Honda WR-V', 'Honda CR-V', 'Honda Elevate'] },
+            'Maruti-Suzuki': {
+                'Hatchbacks': ['Maruti Suzuki Alto 800', 'Maruti Suzuki Alto K10', 'Maruti Suzuki Celerio', 'Maruti Suzuki Swift', 'Maruti Suzuki Baleno', 'Maruti Suzuki Ignis', 'Maruti Suzuki WagonR'],
+                'Sedans': ['Maruti Suzuki Dzire', 'Maruti-Suzuki Ciaz', 'Maruti-Suzuki SX4', 'Maruti-Suzuki Swift Dzire'],
+                'SUVs/Crossovers': ['Maruti Suzuki Brezza', 'Maruti Suzuki Grand Vitara', 'Maruti Suzuki Fronx', 'Maruti Suzuki Jimny'],
+                'MPVs': ['Maruti Suzuki Ertiga', 'Maruti Suzuki XL6']
+            }
+        };
+
+        // --- ELEMENTS ---
+        const carBrandSelect = document.getElementById('carBrand');
+        const carModelSelect = document.getElementById('carModel');
+        const yearSelect = document.getElementById('manufacturingYear');
+        const locationInput = document.getElementById('location');
+        const locationError = document.getElementById('locationError');
+        const phoneInput = document.getElementById('phoneNumber');
+        const phoneError = document.getElementById('phoneError');
+        const form = document.getElementById('carServiceForm');
+        const responseMessage = document.getElementById('responseMessage');
+        const nameInput = document.getElementById('fullName'); // Added for validation
+        const getLocationBtn = document.getElementById('getLocationBtn'); // Get the new button
+
+        // --- FUNCTIONS ---
+        function populateCarModels() {
+            const brand = carBrandSelect.value;
+            carModelSelect.innerHTML = '<option value="">Select Car Model</option>';
+            carModelSelect.disabled = true;
+            if (brand && carModels[brand]) {
+                const brandData = carModels[brand];
+                for (const category in brandData) {
+                    if (brandData.hasOwnProperty(category) && Array.isArray(brandData[category])) {
+                        const optgroup = document.createElement('optgroup');
+                        optgroup.label = category;
+                        brandData[category].forEach(model => {
+                            const option = document.createElement('option');
+                            option.value = model;
+                            option.textContent = model;
+                            optgroup.appendChild(option);
+                        });
+                        carModelSelect.appendChild(optgroup);
+                    }
+                }
+                carModelSelect.disabled = false;
+            } else if (brand) {
+                carModelSelect.innerHTML = '<option value="">No models listed</option>';
+                carModelSelect.disabled = true;
+            } else {
+                carModelSelect.innerHTML = '<option value="">Select Car Brand First</option>';
+                carModelSelect.disabled = true;
+            }
+        }
+
+        function populateYears() {
+            const currentYear = new Date().getFullYear();
+            for (let year = currentYear; year >= 1995; year--) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearSelect.appendChild(option);
+            }
+        }
+
+        function getUserLocation() {
+             // Disable button while fetching
+             getLocationBtn.disabled = true;
+             getLocationBtn.textContent = "Fetching...";
+             locationInput.readOnly = true; // Keep readonly initially
+             locationInput.placeholder = "Fetching location...";
+             locationError.style.display = 'none'; // Hide error initially
+             locationInput.style.backgroundColor = '#f8f9fa'; // Set readonly background
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        // You would typically use a reverse geocoding service here
+                        // For this example, we'll just indicate success
+                        locationInput.value = "Location Detected (Approx.)";
+                        locationInput.readOnly = true; // Keep readonly
+                        locationInput.style.backgroundColor = '#e9ecef'; // Style to look disabled but filled
+                        locationError.style.display = 'none'; // Hide error on success
+
+                        // Re-enable button after success (optional, as it's filled)
+                        getLocationBtn.disabled = false;
+                        getLocationBtn.textContent = "Get Location";
+                    },
+                    (error) => {
+                        console.error("Geolocation Error:", error);
+                        locationInput.value = ""; // Clear value
+                        locationInput.placeholder = "Location permission denied or failed. Enter manually.";
+                        locationInput.readOnly = false; // Allow manual input
+                        locationInput.style.backgroundColor = ''; // Reset background
+                        locationError.textContent = "Could not get location. Please enable permissions or enter manually.";
+                        locationError.style.display = 'block';
+
+                         // Re-enable button after failure
+                        getLocationBtn.disabled = false;
+                        getLocationBtn.textContent = "Get Location";
+                    },
+                    {
+                        timeout: 10000,
+                        enableHighAccuracy: true // Request more accurate location
+                    }
+                );
+            } else {
+                console.warn("Geolocation is not supported.");
+                locationInput.value = "";
+                locationInput.placeholder = "Geolocation not supported. Enter manually.";
+                locationInput.readOnly = false; // Allow manual input
+                locationInput.style.backgroundColor = ''; // Reset background
+                locationError.textContent = "Geolocation is not supported by your browser. Please enter manually.";
+                locationError.style.display = 'block';
+
+                 // Re-enable button (though it won't work)
+                 getLocationBtn.disabled = true; // Disable since it won't work
+                 getLocationBtn.textContent = "Not Supported";
+            }
+        }
+
+        function validatePhoneNumber() {
+            // Check if the input is not empty and matches the pattern
+            if (phoneInput.value.length === 0) {
+                phoneError.style.display = 'none'; // Hide error if empty (required attribute handles empty)
+                return true;
+            }
+            if (phoneInput.validity.patternMismatch || phoneInput.value.length !== 10) {
+                phoneError.style.display = 'block';
+                return false;
+            } else {
+                phoneError.style.display = 'none';
+                return true;
+            }
+        }
+
+
+        // --- EVENT LISTENERS ---
+        carBrandSelect.addEventListener('change', populateCarModels);
+        phoneInput.addEventListener('input', validatePhoneNumber);
+        phoneInput.addEventListener('blur', validatePhoneNumber); // Validate on blur too
+
+        // Add event listener for the new "Get Location" button
+        getLocationBtn.addEventListener('click', getUserLocation);
+
+
+        // Client-side validation before submitting to Formspree
+        form.addEventListener('submit', (e) => {
+            let isValid = true;
+            responseMessage.textContent = ""; // Clear previous messages
+            responseMessage.style.color = '#e74c3c'; // Default message color to error
+
+            // Validate Name
+            if (!nameInput.value.trim()) {
+                isValid = false;
+                if (!responseMessage.textContent) { // Only show the first encountered error
+                    responseMessage.textContent = "Full Name is required.";
+                    nameInput.focus();
+                }
+            }
+
+            // Validate Phone Number
+            if (!phoneInput.value.trim()) { // Check if phone is empty
+                isValid = false;
+                if (!responseMessage.textContent) {
+                    responseMessage.textContent = "Phone Number is required.";
+                    phoneInput.focus();
+                }
+            } else if (!validatePhoneNumber()) { // Check format if not empty
+                isValid = false;
+                if (!responseMessage.textContent) {
+                    responseMessage.textContent = "Please fix the phone number error.";
+                    phoneInput.focus();
+                }
+            }
+
+            // Validate Car Brand
+            if (!carBrandSelect.value) {
+                isValid = false;
+                if (!responseMessage.textContent) {
+                    responseMessage.textContent = "Please select a Car Brand.";
+                    carBrandSelect.focus();
+                }
+            }
+
+            // Validate Car Model
+            if (carModelSelect.disabled || !carModelSelect.value) { // Check if disabled OR no value selected
+                isValid = false;
+                if (!responseMessage.textContent) {
+                    // Refine message based on state
+                    responseMessage.textContent = carModelSelect.disabled ? "Please select a Car Brand first." : "Please select a Car Model.";
+                    carModelSelect.focus();
+                }
+            }
+
+
+            // Validate Fuel Type
+            if (!fuelType.value) {
+                isValid = false;
+                if (!responseMessage.textContent) {
+                    responseMessage.textContent = "Please select a Fuel Type.";
+                    fuelType.focus();
+                }
+            }
+
+            // Validate Manufacturing Year
+            if (!yearSelect.value) {
+                isValid = false;
+                if (!responseMessage.textContent) {
+                    responseMessage.textContent = "Please select a Manufacturing Year.";
+                    yearSelect.focus();
+                }
+            }
+
+            // Validate Location (This section ensures location is mandatory)
+             const currentLocationValue = locationInput.value.trim();
+             const locationFetchFailed = locationInput.readOnly && locationInput.placeholder.includes("permission denied or failed");
+             const geolocationNotSupported = locationInput.readOnly && locationInput.placeholder.includes("Geolocation not supported");
+
+
+            if (currentLocationValue === "" || locationFetchFailed || geolocationNotSupported) {
+                isValid = false;
+                 if (!responseMessage.textContent) {
+                     if (geolocationNotSupported) {
+                          responseMessage.textContent = "Location is required. Geolocation is not supported, please enter manually.";
+                     } else if (locationFetchFailed) {
+                         responseMessage.textContent = "Location is required. Please allow access or enter manually.";
+                     } else { // Value is just empty
+                         responseMessage.textContent = "Location is required. Please get location or enter manually.";
+                     }
+                    // locationInput.focus(); // Focus might not work consistently depending on readonly state
+                 }
+                 // Update location error message
+                 if (geolocationNotSupported) {
+                     locationError.textContent = "Geolocation not supported. Please enter manually.";
+                 } else if (locationFetchFailed) {
+                      locationError.textContent = "Location permission denied or failed. Please enter manually.";
+                 } else { // Value is just empty
+                      locationError.textContent = "Location is required. Please get location or enter manually.";
+                 }
+                 locationError.style.display = 'block';
+
+            } else {
+                locationError.style.display = 'none'; // Hide error if location is valid (either fetched or manually entered)
+            }
+
+
+            if (!isValid) {
+                e.preventDefault(); // STOP submission if any validation failed
+            } else {
+                // If all client-side checks pass, allow the form to submit to Formspree
+                responseMessage.textContent = "Submitting..."; // Indicate submission
+                responseMessage.style.color = '#3498DB'; // Submission color
+                // Use Formspree's built-in AJAX handling for a smoother experience
+                e.preventDefault(); // Prevent default form submission for AJAX example
+                const formData = new FormData(form);
+                fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        responseMessage.textContent = 'Thank you for your booking! We will contact you shortly.';
+                        responseMessage.style.color = '#2ecc71'; // Success color
+                        form.reset(); // Reset the form on successful submission
+                        // Manually trigger actions that reset doesn't handle fully:
+                        getUserLocation(); // Re-attempt location fetch to reset input state
+                        populateCarModels(); // Reset car model dropdown state
+                        phoneError.style.display = 'none'; // Hide phone error after reset
+                        locationError.style.display = 'none'; // Hide location error after reset
+
+                    } else {
+                        response.json().then(data => {
+                            if (Object.hasOwn(data, 'errors')) {
+                                responseMessage.textContent = data["errors"].map(error => error["message"]).join(", ");
+                            } else {
+                                responseMessage.textContent = 'Oops! There was a problem submitting your form.';
+                            }
+                            responseMessage.style.color = '#e74c3c'; // Error color
+                        })
+                    }
+                }).catch(error => {
+                    responseMessage.textContent = 'Oops! There was a network problem. Please try again.';
+                    responseMessage.style.color = '#e74c3c'; // Error color
+                });
+            }
+        });
+
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            populateYears();
+            getUserLocation(); // Initial location fetch attempt on page load
+        });
+    </script>
+</body>
+
+</html>
